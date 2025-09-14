@@ -1,458 +1,455 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shivam Sah | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color-light: #f9fafb;
-      --text-color-light: #111827;
-      --bg-color-dark: #1f2937;
-      --text-color-dark: #f9fafb;
-      --accent-color: #3b82f6;
-    }
-    html.dark {
-      background-color: var(--bg-color-dark);
-      color: var(--text-color-dark);
-    }
-    html:not(.dark) {
-      background-color: var(--bg-color-light);
-      color: var(--text-color-light);
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      transition: background-color 500ms ease, color 500ms ease;
-    }
-    .text-gradient {
-      background-image: linear-gradient(to right, #3b82f6, #20c5b3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .animate-in {
-      transform: translateY(50px);
-      opacity: 0;
-      transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-    }
-    .animate-in.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .typing-effect span {
-      display: inline-block;
-      opacity: 0;
-      animation: appear 0.05s forwards;
-    }
-    @keyframes appear {
-      to { opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Sah | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #F8F8F8;
+            --text-light: #181818;
+            --bg-dark: #121212;
+            --text-dark: #F8F8F8;
+            --accent: #00BFFF; /* Deep Sky Blue */
+        }
+        html.dark {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        html:not(.dark) {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 500ms ease, color 500ms ease;
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--accent), #20c5b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .animate-fade-up {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .animate-fade-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .typing-effect span {
+            display: inline-block;
+            opacity: 0;
+            animation: appear 0.05s forwards;
+        }
+        @keyframes appear {
+            to { opacity: 1; }
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body class="antialiased">
 
-  <!-- Dark Mode Toggle Button -->
-  <div class="fixed top-4 right-4 z-50">
-    <button id="darkModeToggle" class="p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110" style="background-color: #1f2937; color: #f9fafb;">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile Menu Button -->
-  <div class="md:hidden fixed top-4 left-4 z-50">
-    <button id="mobileMenuToggle" class="text-gray-600 dark:text-gray-400 focus:outline-none">
-      <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile Menu Overlay -->
-  <div id="mobileMenu" class="fixed inset-0 z-40 bg-gray-950 transition-transform duration-500 ease-in-out transform translate-x-full">
-    <div class="flex flex-col items-center justify-center min-h-screen space-y-8">
-      <button id="closeMenuButton" class="absolute top-8 right-8 text-gray-400">
-        <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <a href="#about" class="text-4xl font-bold text-gray-100 hover:text-blue-500 transition-colors duration-300 mobile-link">About</a>
-      <a href="#skills" class="text-4xl font-bold text-gray-100 hover:text-blue-500 transition-colors duration-300 mobile-link">Skills</a>
-      <a href="#projects" class="text-4xl font-bold text-gray-100 hover:text-blue-500 transition-colors duration-300 mobile-link">Projects</a>
-      <a href="#experience" class="text-4xl font-bold text-gray-100 hover:text-blue-500 transition-colors duration-300 mobile-link">Experience</a>
-      <a href="#contact" class="text-4xl font-bold text-gray-100 hover:text-blue-500 transition-colors duration-300 mobile-link">Contact</a>
-    </div>
-  </div>
-
-  <!-- Header & Desktop Navigation -->
-  <header class="fixed w-full z-30 bg-transparent py-4">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <a href="#" class="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-500">
-        Shivam Sah
-      </a>
-      <div class="hidden md:flex space-x-8">
-        <a href="#about" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">About</a>
-        <a href="#skills" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Skills</a>
-        <a href="#projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Projects</a>
-        <a href="#experience" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Experience</a>
-        <a href="#contact" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section id="hero" class="flex flex-col items-center justify-center min-h-screen text-center px-4 pt-16 relative overflow-hidden">
-      <div class="z-10 animate-in">
-        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-          <span class="text-gradient">Shivam Sah</span>
-        </h1>
-        <h2 class="mt-4 text-3xl md:text-4xl font-light text-gray-800 dark:text-gray-200">
-          Full Stack Developer
-        </h2>
-        <p id="tagline" class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto typing-effect"></p>
-        <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <a href="#projects" class="px-6 py-3 font-semibold text-white bg-blue-500 rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300 transform hover:scale-105">View My Work</a>
-          <a href="#contact" class="px-6 py-3 font-semibold text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 rounded-full shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 transform hover:scale-105">Hire Me</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section id="about" class="py-20 px-4 md:px-8">
-      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center animate-in">
-        <div class="md:order-last">
-          <div class="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto shadow-xl transition-all duration-500 transform hover:scale-105">
-            <img src="a.png" alt="Shivam Sah" class="w-full h-full object-cover" />
-          </div>
-        </div>
-        <div>
-          <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">About Me</h3>
-          <p class="text-lg text-gray-600 dark:text-gray-400">
-            I am a B.Tech CSE fresher from Kalinga Institute of Industrial Technology (KIIT), skilled in Full Stack development and web design. I have a strong foundation in project management, problem-solving, and attention to detail. My passion lies in building high-quality, user-focused web applications that are both functional and visually appealing.
-          </p>
-          <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-            Known for my excellent communication skills, I thrive in collaborative environments and am always eager to learn and grow. I am excited to bring my skills to new challenges and contribute to innovative projects.
-          </p>
-          <div class="mt-6 flex space-x-4">
-            <a href="https://github.com/shivamsah0" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 transform hover:scale-110">
-              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-gray-800 dark:text-gray-200">
-                <title>GitHub</title>
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.805 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.73.084-.73 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.29-1.552 3.295-1.23 3.295-1.23.645 1.653.24 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .32.21.693.825.575C20.565 22.18 24 17.67 24 12.297c0-6.627-5.373-12-12-12z" />
-              </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/shivam-sah-73b162279/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 transform hover:scale-110">
-              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-blue-700 dark:text-blue-500">
-                <title>LinkedIn</title>
-                <path d="M20.447 20.452h-3.554v-5.029c0-1.196-.022-2.744-1.674-2.744-1.676 0-1.933 1.309-1.933 2.661v5.112h-3.554V9.293h3.419v1.57h.05c.475-.898 1.637-1.84 3.37-1.84 3.601 0 4.265 2.37 4.265 5.442v6.292zM5.962 7.749c-1.127 0-2.046-.917-2.046-2.043 0-1.125.919-2.044 2.046-2.044s2.046.919 2.046 2.044c0 1.126-.919 2.043-2.046 2.043zm1.789 12.703h-3.578V9.293h3.578v11.159zM22.225 0H1.771C.794 0 0 .794 0 1.771v20.457c0 .976.794 1.771 1.771 1.771h20.454c.977 0 1.771-.794 1.771-1.771V1.771C24 .794 23.206 0 22.225 0z" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 px-4 md:px-8">
-      <div class="max-w-7xl mx-auto animate-in">
-        <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">My Skills</h3>
-        <div id="skills-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 text-center">
-          <!-- Skills will be injected here by JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 md:px-8">
-      <div class="max-w-7xl mx-auto animate-in">
-        <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">My Projects</h3>
-        <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          <!-- Projects will be injected here by JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 px-4 md:px-8">
-      <div class="max-w-5xl mx-auto animate-in">
-        <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">Experience & Certifications</h3>
-        <div id="experiences-container" class="space-y-8">
-          <!-- Experiences will be injected here by JavaScript -->
-        </div>
-        <div class="mt-12">
-          <h4 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Certifications</h4>
-          <ul id="certifications-container" class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-            <!-- Certifications will be injected here by JavaScript -->
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-4 md:px-8">
-      <div class="max-w-5xl mx-auto animate-in">
-        <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">Get In Touch</h3>
-        <div class="grid md:grid-cols-2 gap-12">
-          <div class="space-y-6">
-            <p class="text-gray-600 dark:text-gray-400 text-lg">
-              Have a question or want to work together? Feel free to reach out to me!
-            </p>
-            <div class="flex items-center space-x-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <a href="mailto:Shivamsah639@gmail.com" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Shivamsah639@gmail.com</a>
-            </div>
-            <div class="flex items-center space-x-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95 1.12l-.65 3.32a1 1 0 00.1 1.05l2.25 2.25a1 1 0 001.05.1l3.32-.65a1 1 0 011.12.95V19a2 2 0 01-2 2h-4a2 2 0 01-2-2v-3.28a1 1 0 00-.95-1.12l-3.32.65a1 1 0 00-1.05-.1L3 14.72V19z" />
-              </svg>
-              <p class="text-gray-600 dark:text-gray-400">+91 9124379138</p>
-            </div>
-            <div class="flex space-x-6">
-              <a href="https://github.com/shivamsah0" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full transform transition-all duration-300 hover:scale-110">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-gray-800 dark:text-gray-200 hover:text-blue-500">
-                  <title>GitHub</title>
-                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.805 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.73.084-.73 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.29-1.552 3.295-1.23 3.295-1.23.645 1.653.24 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .32.21.693.825.575C20.565 22.18 24 17.67 24 12.297c0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/in/shivam-sah-73b162279/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full transform transition-all duration-300 hover:scale-110">
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-blue-700 dark:text-blue-500">
-                  <title>LinkedIn</title>
-                  <path d="M20.447 20.452h-3.554v-5.029c0-1.196-.022-2.744-1.674-2.744-1.676 0-1.933 1.309-1.933 2.661v5.112h-3.554V9.293h3.419v1.57h.05c.475-.898 1.637-1.84 3.37-1.84 3.601 0 4.265 2.37 4.265 5.442v6.292zM5.962 7.749c-1.127 0-2.046-.917-2.046-2.043 0-1.125.919-2.044 2.046-2.044s2.046.919 2.046 2.044c0 1.126-.919 2.043-2.046 2.043zm1.789 12.703h-3.578V9.293h3.578v11.159zM22.225 0H1.771C.794 0 0 .794 0 1.771v20.457c0 .976.794 1.771 1.771 1.771h20.454c.977 0 1.771-.794 1.771-1.771V1.771C24 .794 23.206 0 22.225 0z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="bg-gray-200 dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-            <form>
-              <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" />
-              </div>
-              <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" />
-              </div>
-              <div class="mb-4">
-                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"></textarea>
-              </div>
-              <div class="text-right">
-                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="py-8 border-t border-gray-200 dark:border-gray-800 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Shivam Sah. All rights reserved.</p>
-      <p class="mt-2 text-gray-600 dark:text-gray-400">
-        Built with <span class="text-red-500">❤️</span> using Vanilla JS & TailwindCSS.
-      </p>
-      <div class="mt-4 flex justify-center space-x-4">
-        <a href="#hero" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Home</a>
-        <a href="#projects" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Projects</a>
-        <a href="#contact" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Data
-      const skills = [
-        { name: 'JavaScript', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-        { name: 'React.js', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'HTML', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-        { name: 'CSS', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-        { name: 'Tailwind CSS', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg' },
-        { name: 'Node.js', category: 'Backend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'Express.js', category: 'Backend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
-        { name: 'MongoDB', category: 'Database', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
-        { name: 'C', category: 'Programming Languages', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
-        { name: 'Java', category: 'Programming Languages', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
-        { name: 'Git', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-        { name: 'GitHub', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
-        { name: 'VS Code', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
-      ];
-
-      const projects = [
-        {
-          title: 'Employee Management System',
-          description: 'A comprehensive Employee Management System built with the MERN stack. Features include CRUD operations, secure authentication, and real-time data updates.',
-          techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Redux'],
-          githubLink: 'https://github.com/shivamsah0/employee-management-system',
-          liveDemoLink: '#',
-          image: 'https://placehold.co/600x400/1e293b/d1d5db?text=Employee+Management',
-        },
-        {
-          title: 'E-commerce Website',
-          description: 'A responsive e-commerce website designed and developed using HTML, CSS, JavaScript, and MongoDB. Focused on clean UI/UX and smooth user navigation.',
-          techStack: ['HTML', 'CSS', 'JavaScript', 'MongoDB'],
-          githubLink: 'https://github.com/shivamsah0/e-commerce-website',
-          liveDemoLink: '#',
-          image: 'https://placehold.co/600x400/1e293b/d1d5db?text=E-commerce+Website',
-        },
-      ];
-
-      const experiences = [
-        {
-          role: 'Mini-Project Lead (Academic Role)',
-          company: 'Kalinga Institute of Industrial Technology (KIIT)',
-          duration: 'Aug 2025 - Oct 2025',
-          description: 'Led a 4-member team to implement a full-stack Employee Management System using the MERN stack. Designed backend architecture, applied secure authentication, and conducted peer code reviews.',
-        },
-      ];
-
-      const certifications = [
-        { name: 'AWS Cloud Practitioner Essential', link: 'https://www.credly.com/badges/...' },
-        { name: 'Data Analytics Job Simulation', link: 'https://www.credly.com/badges/...' },
-        { name: 'Front End Development', link: 'https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxOTMzIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvODczNzE0Ml84ODg0NzE2MTc1NDM3NTQ5NDY3My5wbmciLCJ1c2VybmFtZSI6IlNISVZBTSBTQUgifQ%3D%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4511%2FIntroduction-to-Front-End-Development%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1481179163210457807&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVD3VJD08L9wmtCkuyrytKTUstKsrMS49PKsovL04tsvUBqkpN8cwDAApUj4FBAAAA' },
-      ];
-
-      // Dynamic content injection
-      const skillsContainer = document.getElementById('skills-container');
-      skills.forEach(skill => {
-        skillsContainer.innerHTML += `
-          <div class="p-4 sm:p-6 rounded-lg shadow-lg dark:bg-gray-800 transition-transform duration-300 hover:scale-110 hover:shadow-xl">
-            <img src="${skill.logo}" alt="${skill.name}" class="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4" />
-            <p class="text-sm sm:text-lg font-semibold text-gray-800 dark:text-gray-200">${skill.name}</p>
-          </div>
-        `;
-      });
-
-      const projectsContainer = document.getElementById('projects-container');
-      projects.forEach(project => {
-        const techBadges = project.techStack.map(tech => `<span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-2.5 py-1 rounded-full">${tech}</span>`).join('');
-        projectsContainer.innerHTML += `
-          <div class="p-6 rounded-lg shadow-lg dark:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-            <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover rounded-lg mb-4" />
-            <h4 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">${project.title}</h4>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">${project.description}</p>
-            <div class="flex flex-wrap gap-2 mb-4">${techBadges}</div>
-            <div class="flex space-x-4">
-              <a href="${project.githubLink}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">GitHub</a>
-              <a href="${project.liveDemoLink}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">Live Demo</a>
-            </div>
-          </div>
-        `;
-      });
-
-      const experiencesContainer = document.getElementById('experiences-container');
-      experiences.forEach(exp => {
-        experiencesContainer.innerHTML += `
-          <div class="p-6 rounded-lg shadow-lg dark:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-            <h4 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-1">${exp.role}</h4>
-            <p class="text-gray-600 dark:text-gray-400 italic mb-2">${exp.company}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">${exp.duration}</p>
-            <p class="text-gray-600 dark:text-gray-400">${exp.description}</p>
-          </div>
-        `;
-      });
-
-      const certificationsContainer = document.getElementById('certifications-container');
-      certifications.forEach(cert => {
-        certificationsContainer.innerHTML += `
-          <li class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+    <div class="fixed top-6 right-6 z-50">
+        <button id="darkModeToggle" class="p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110" style="background-color: #121212; color: #F8F8F8;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
-            <a href="${cert.link}" target="_blank" rel="noopener noreferrer" class="hover:underline">
-              ${cert.name}
+        </button>
+    </div>
+
+    <div class="md:hidden fixed top-6 left-6 z-50">
+        <button id="mobileMenuToggle" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+            <svg class="h-8 w-8 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobileMenu" class="fixed inset-0 z-40 bg-black bg-opacity-95 transition-transform duration-500 ease-in-out transform translate-x-full">
+        <div class="flex flex-col items-center justify-center min-h-screen space-y-8">
+            <button id="closeMenuButton" class="absolute top-8 right-8 text-gray-400">
+                <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="#about" class="text-4xl font-bold text-gray-100 hover:text-cyan-400 transition-colors duration-300 mobile-link">About</a>
+            <a href="#skills" class="text-4xl font-bold text-gray-100 hover:text-cyan-400 transition-colors duration-300 mobile-link">Skills</a>
+            <a href="#projects" class="text-4xl font-bold text-gray-100 hover:text-cyan-400 transition-colors duration-300 mobile-link">Projects</a>
+            <a href="#experience" class="text-4xl font-bold text-gray-100 hover:text-cyan-400 transition-colors duration-300 mobile-link">Experience</a>
+            <a href="#contact" class="text-4xl font-bold text-gray-100 hover:text-cyan-400 transition-colors duration-300 mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <header class="fixed w-full z-30 bg-transparent py-4 backdrop-blur-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-500">
+                Shivam Sah
             </a>
-          </li>
-        `;
-      });
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Projects</a>
+                <a href="#experience" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Experience</a>
+                <a href="#contact" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-      // Dark mode toggle logic
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const html = document.documentElement;
-      const lightIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`;
-      const darkIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`;
+    <main>
+        <section id="hero" class="flex flex-col items-center justify-center min-h-screen text-center px-4 pt-16 relative overflow-hidden">
+            <div class="z-10 animate-fade-up">
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight">
+                    <span class="text-gradient">Shivam Sah</span>
+                </h1>
+                <h2 class="mt-4 text-3xl md:text-5xl font-light text-gray-800 dark:text-gray-200">
+                    Full Stack Developer
+                </h2>
+                <p id="tagline" class="mt-6 text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto typing-effect"></p>
+                <div class="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#projects" class="px-8 py-4 font-semibold text-white bg-black dark:bg-gray-100 dark:text-black rounded-lg shadow-lg hover:bg-gray-800 dark:hover:bg-white transition-colors duration-300 transform hover:scale-105">View My Work</a>
+                    <a href="#contact" class="px-8 py-4 font-semibold text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 rounded-lg shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 transform hover:scale-105">Hire Me</a>
+                </div>
+            </div>
+        </section>
 
-      let darkMode = true;
-      const updateDarkMode = () => {
-        if (darkMode) {
-          html.classList.add('dark');
-          darkModeToggle.innerHTML = lightIcon;
-          darkModeToggle.style.backgroundColor = '#1f2937';
-          darkModeToggle.style.color = '#f9fafb';
-        } else {
-          html.classList.remove('dark');
-          darkModeToggle.innerHTML = darkIcon;
-          darkModeToggle.style.backgroundColor = '#e5e7eb';
-          darkModeToggle.style.color = '#111827';
-        }
-      };
+        <section id="about" class="py-20 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center animate-fade-up">
+                <div class="md:order-last flex justify-center">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl transition-all duration-500 transform hover:scale-105 border-4 border-gray-800 dark:border-gray-200">
+                        <img src="a.png" alt="Shivam Sah" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">About Me</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        I'm a B.Tech CSE fresher from Kalinga Institute of Industrial Technology (KIIT), specializing in **Full Stack development** and modern web design. I have a strong foundation in project management, problem-solving, and attention to detail. My passion is building high-quality, user-focused web applications that are both functional and visually stunning.
+                    </p>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                        Known for my excellent communication skills, I thrive in collaborative environments and am always eager to learn and grow. I'm excited to bring my skills to new challenges and contribute to innovative projects.
+                    </p>
+                    <div class="mt-8 flex space-x-6">
+                        <a href="https://github.com/shivamsah0" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 transform hover:scale-110">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-gray-800 dark:text-gray-200">
+                                <title>GitHub</title>
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.805 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.73.084-.73 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.29-1.552 3.295-1.23 3.295-1.23.645 1.653.24 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .32.21.693.825.575C20.565 22.18 24 17.67 24 12.297c0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/shivam-sah-73b162279/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 transform hover:scale-110">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 fill-current text-blue-700 dark:text-blue-500">
+                                <title>LinkedIn</title>
+                                <path d="M20.447 20.452h-3.554v-5.029c0-1.196-.022-2.744-1.674-2.744-1.676 0-1.933 1.309-1.933 2.661v5.112h-3.554V9.293h3.419v1.57h.05c.475-.898 1.637-1.84 3.37-1.84 3.601 0 4.265 2.37 4.265 5.442v6.292zM5.962 7.749c-1.127 0-2.046-.917-2.046-2.043 0-1.125.919-2.044 2.046-2.044s2.046.919 2.046 2.044c0 1.126-.919 2.043-2.046 2.043zm1.789 12.703h-3.578V9.293h3.578v11.159zM22.225 0H1.771C.794 0 0 .794 0 1.771v20.457c0 .976.794 1.771 1.771 1.771h20.454c.977 0 1.771-.794 1.771-1.771V1.771C24 .794 23.206 0 22.225 0z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      darkModeToggle.addEventListener('click', () => {
-        darkMode = !darkMode;
-        updateDarkMode();
-      });
-      updateDarkMode();
+        <section id="skills" class="py-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto animate-fade-up">
+                <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-12 text-center">My Skills</h3>
+                <div id="skills-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 text-center">
+                    </div>
+            </div>
+        </section>
 
-      // Mobile menu logic
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const closeMenuButton = document.getElementById('closeMenuButton');
-      const mobileLinks = document.querySelectorAll('.mobile-link');
+        <section id="projects" class="py-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto animate-fade-up">
+                <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-12 text-center">My Projects</h3>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    </div>
+            </div>
+        </section>
 
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenu.classList.remove('translate-x-full');
-      });
-      closeMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.add('translate-x-full');
-      });
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('translate-x-full');
+        <section id="experience" class="py-20 px-4 md:px-8">
+            <div class="max-w-5xl mx-auto animate-fade-up">
+                <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-12 text-center">Experience & Certifications</h3>
+                <div id="experiences-container" class="space-y-10">
+                    </div>
+                <div class="mt-16">
+                    <h4 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Certifications</h4>
+                    <ul id="certifications-container" class="list-none space-y-4 text-gray-600 dark:text-gray-400">
+                        </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 px-4 md:px-8">
+            <div class="max-w-5xl mx-auto animate-fade-up">
+                <h3 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-12 text-center">Get In Touch</h3>
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <p class="text-gray-600 dark:text-gray-400 text-lg">
+                            Have a question or want to collaborate? I'm always open to new opportunities. Let's build something great together.
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:Shivamsah639@gmail.com" class="text-gray-600 dark:text-gray-400 text-lg hover:text-blue-500 transition-colors duration-300">Shivamsah639@gmail.com</a>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95 1.12l-.65 3.32a1 1 0 00.1 1.05l2.25 2.25a1 1 0 001.05.1l3.32-.65a1 1 0 011.12.95V19a2 2 0 01-2 2h-4a2 2 0 01-2-2v-3.28a1 1 0 00-.95-1.12l-3.32.65a1 1 0 00-1.05-.1L3 14.72V19z" />
+                            </svg>
+                            <p class="text-gray-600 dark:text-gray-400 text-lg">+91 9124379138</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-200 dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-300 dark:border-gray-700">
+                        <form action="https://formspree.io/f/your_form_id" method="POST">
+                            <div class="mb-6">
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                                <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3" />
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                                <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3" />
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-3"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 dark:bg-cyan-400 dark:text-black hover:bg-blue-600 dark:hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 border-t border-gray-200 dark:border-gray-800 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Shivam Sah. All rights reserved.</p>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+                Built with <span class="text-red-500">❤️</span> using Vanilla JS & TailwindCSS.
+            </p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="#hero" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Home</a>
+                <a href="#projects" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Projects</a>
+                <a href="#contact" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data
+            const skills = [
+                { name: 'JavaScript', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+                { name: 'React.js', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+                { name: 'HTML', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+                { name: 'CSS', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+                { name: 'Tailwind CSS', category: 'Frontend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg' },
+                { name: 'Node.js', category: 'Backend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                { name: 'Express.js', category: 'Backend', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+                { name: 'MongoDB', category: 'Database', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+                { name: 'C', category: 'Programming Languages', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
+                { name: 'Java', category: 'Programming Languages', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+                { name: 'Git', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+                { name: 'GitHub', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+                { name: 'VS Code', category: 'Tools', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
+            ];
+
+            const projects = [
+                {
+                    title: 'Employee Management System',
+                    description: 'A comprehensive Employee Management System built with the MERN stack. Features include CRUD operations, secure authentication, and real-time data updates.',
+                    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Redux'],
+                    githubLink: 'https://github.com/shivamsah0/employee-management-system',
+                    liveDemoLink: '#',
+                    image: 'https://placehold.co/600x400/1e293b/d1d5db?text=Employee+Management',
+                },
+                {
+                    title: 'E-commerce Website',
+                    description: 'A responsive e-commerce website designed and developed using HTML, CSS, JavaScript, and MongoDB. Focused on clean UI/UX and smooth user navigation.',
+                    techStack: ['HTML', 'CSS', 'JavaScript', 'MongoDB'],
+                    githubLink: 'https://github.com/shivamsah0/e-commerce-website',
+                    liveDemoLink: '#',
+                    image: 'https://placehold.co/600x400/1e293b/d1d5db?text=E-commerce+Website',
+                },
+            ];
+
+            const experiences = [
+                {
+                    role: 'Mini-Project Lead (Academic Role)',
+                    company: 'Kalinga Institute of Industrial Technology (KIIT)',
+                    duration: 'Aug 2025 - Oct 2025',
+                    description: 'Led a 4-member team to implement a full-stack Employee Management System using the MERN stack. Designed backend architecture, applied secure authentication, and conducted peer code reviews.',
+                },
+            ];
+
+            const certifications = [
+                { name: 'AWS Cloud Practitioner Essential', link: 'https://www.credly.com/badges/...' },
+                { name: 'Data Analytics Job Simulation', link: 'https://www.credly.com/badges/...' },
+                { name: 'Front End Development', link: 'https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxOTMzIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvODczNzE0Ml84ODg0NzE2MTc1NDM3NTQ5NDY3My5wbmciLCJ1c2VybmFtZSI6IlNISVZBTSBTQUgifQ%3D%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4511%2FIntroduction-to-Front-End-Development%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1481179163210457807&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVD3VJD08L9wmtCkuyrytKTUstKsrMS49PKsovL04tsvUBqkpN8cwDAApUj4FBAAAA' },
+            ];
+
+            // Dynamic content injection
+            const skillsContainer = document.getElementById('skills-container');
+            skills.forEach(skill => {
+                skillsContainer.innerHTML += `
+                    <div class="p-6 rounded-xl shadow-lg dark:bg-gray-800 transition-transform duration-300 hover:scale-110 hover:shadow-2xl">
+                        <img src="${skill.logo}" alt="${skill.name}" class="h-16 w-16 mx-auto mb-4" />
+                        <p class="text-sm sm:text-lg font-semibold text-gray-800 dark:text-gray-200">${skill.name}</p>
+                    </div>
+                `;
+            });
+
+            const projectsContainer = document.getElementById('projects-container');
+            projects.forEach(project => {
+                const techBadges = project.techStack.map(tech => `<span class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">${tech}</span>`).join('');
+                projectsContainer.innerHTML += `
+                    <div class="project-card relative group rounded-xl overflow-hidden shadow-xl dark:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+                        <img src="${project.image}" alt="${project.title}" class="project-image w-full h-64 object-cover transition-transform duration-500" />
+                        <div class="project-overlay absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-500">
+                            <h4 class="text-2xl font-bold text-white mb-2">${project.title}</h4>
+                            <p class="text-gray-300 text-center mb-4">${project.description}</p>
+                            <div class="flex flex-wrap justify-center gap-2 mb-4">${techBadges}</div>
+                            <div class="flex space-x-4">
+                                <a href="${project.githubLink}" target="_blank" rel="noopener noreferrer" class="text-white bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full transition-colors duration-300">GitHub</a>
+                                <a href="${project.liveDemoLink}" target="_blank" rel="noopener noreferrer" class="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full transition-colors duration-300">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const experiencesContainer = document.getElementById('experiences-container');
+            experiences.forEach(exp => {
+                experiencesContainer.innerHTML += `
+                    <div class="p-8 rounded-xl shadow-lg dark:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl border border-gray-300 dark:border-gray-700">
+                        <h4 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">${exp.role}</h4>
+                        <p class="text-gray-600 dark:text-gray-400 italic mb-2">${exp.company}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">${exp.duration}</p>
+                        <p class="text-gray-600 dark:text-gray-400">${exp.description}</p>
+                    </div>
+                `;
+            });
+
+            const certificationsContainer = document.getElementById('certifications-container');
+            certifications.forEach(cert => {
+                certificationsContainer.innerHTML += `
+                    <li class="flex items-center space-x-3 p-4 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 dark:text-cyan-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <a href="${cert.link}" target="_blank" rel="noopener noreferrer" class="hover:underline text-gray-800 dark:text-gray-200">
+                            ${cert.name}
+                        </a>
+                    </li>
+                `;
+            });
+
+            // Dark mode toggle logic
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const html = document.documentElement;
+            const lightIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`;
+            const darkIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`;
+            
+            let darkMode = true;
+            const updateDarkMode = () => {
+                if (darkMode) {
+                    html.classList.add('dark');
+                    darkModeToggle.innerHTML = lightIcon;
+                    darkModeToggle.style.backgroundColor = '#121212';
+                    darkModeToggle.style.color = '#F8F8F8';
+                } else {
+                    html.classList.remove('dark');
+                    darkModeToggle.innerHTML = darkIcon;
+                    darkModeToggle.style.backgroundColor = '#F8F8F8';
+                    darkModeToggle.style.color = '#121212';
+                }
+            };
+
+            darkModeToggle.addEventListener('click', () => {
+                darkMode = !darkMode;
+                updateDarkMode();
+            });
+            updateDarkMode();
+
+            // Mobile menu logic
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenuButton = document.getElementById('closeMenuButton');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            closeMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+
+            // Typing effect logic
+            const taglineElement = document.getElementById('tagline');
+            const taglines = [
+                "I build modern web experiences that scale.",
+                "I craft intuitive user interfaces.",
+                "I solve complex problems with elegant code."
+            ];
+            let currentTaglineIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeWriter() {
+                const currentTagline = taglines[currentTaglineIndex];
+                if (isDeleting) {
+                    taglineElement.textContent = currentTagline.substring(0, charIndex--);
+                } else {
+                    taglineElement.textContent = currentTagline.substring(0, charIndex++);
+                }
+
+                let typingSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentTagline.length + 1) {
+                    typingSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+                    typingSpeed = 500;
+                }
+
+                setTimeout(typeWriter, typingSpeed);
+            }
+            typeWriter();
+
+            // Scroll-based animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            document.querySelectorAll('.animate-fade-up').forEach(section => {
+                observer.observe(section);
+            });
         });
-      });
-
-      // Typing effect logic
-      const taglineElement = document.getElementById('tagline');
-      const taglineText = "I build modern web experiences that scale.";
-      let charIndex = 0;
-      taglineElement.innerHTML = taglineText.split('').map(char => `<span>${char}</span>`).join('');
-
-      const typingInterval = setInterval(() => {
-        if (charIndex < taglineText.length) {
-          taglineElement.children[charIndex].style.animationDelay = `${charIndex * 0.05}s`;
-          charIndex++;
-        } else {
-          clearInterval(typingInterval);
-        }
-      }, 50);
-
-      // Scroll-based animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.2
-      });
-
-      document.querySelectorAll('.animate-in').forEach(section => {
-        observer.observe(section);
-      });
-    });
-  </script>
-
+    </script>
 </body>
 </html>
